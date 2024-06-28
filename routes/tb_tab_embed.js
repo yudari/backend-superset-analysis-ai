@@ -4,6 +4,6 @@ import { getAllTb_Embed } from '../controllers/tb_tab_embed.js'; // pastikan pat
 
 const routerTbTabEmbed = Router();
 
-routerTbTabEmbed.get('/tb_tab_embed', getAllTb_Embed);
+routerTbTabEmbed.get('/tb_tab_embed/', getAllTb_Embed);
 
 export default routerTbTabEmbed;

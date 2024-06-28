@@ -4,9 +4,9 @@ import sequelize from "../util/database.js";
 
 const models = initModels(sequelize);
 
-const getAllTb_Embed = async (req, res, next) => {
-    console.log(`Ini tb embed berjalan`);
-    models.tb_tab_embed.findAll()
+const getAllDashboardChartResultAnalysis = async (req, res, next) => {
+    console.log(`Ini table all dashboard chart berjalan`);
+    models.tb_tab_dashboard_result_analysis.findAll()
         .then(data => {
             res.status(200).json({ data: data });
         })

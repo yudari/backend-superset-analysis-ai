@@ -5,11 +5,16 @@ import sequelize from './util/database.js'
 
 
 import routerTbTabEmbed from './routes/tb_tab_embed.js';
+import routerTbTabDashboardEmbed from './routes/tb_tab_dashboard_embed.js';
+import routerTabChartResultAnalysis from './routes/tb_tab_chart_result_analysis.js';
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Middleware untuk menyajikan file statis dari folder "uploads"
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -23,6 +28,8 @@ app.get('/', (req, res, next) => {
 });
 
 app.use('/superset-ai', routerTbTabEmbed);
+app.use('/superset-ai', routerTbTabDashboardEmbed)
+app.use('/superset-ai', routerTabChartResultAnalysis)
 
 //error handling
 app.use((error, req, res, next) => {
