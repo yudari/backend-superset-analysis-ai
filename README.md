@@ -1,0 +1,4 @@
+- git clone https://github.com/yudari/backend-superset-analysis-ai/
+- ubah .env_example menjadi .env
+- jalankan perintah npm install
+- lalu npm run start
