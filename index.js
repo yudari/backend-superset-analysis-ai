@@ -2,7 +2,7 @@ import 'dotenv/config.js'
 import express from 'express'
 import bodyParser from "body-parser";
 import sequelize from './util/database.js'
-
+import path from 'path'
 
 import routerTbTabEmbed from './routes/tb_tab_embed.js';
 import routerTbTabDashboardEmbed from './routes/tb_tab_dashboard_embed.js';
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Middleware untuk menyajikan file statis dari folder "uploads"
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(getPath(), 'uploads')));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 //test route
 app.get('/', (req, res, next) => {
-    res.send('Hello World');
+    res.send(path.join(getPath(), 'uploads'));
 });
 
 app.use('/superset-ai', routerTbTabEmbed);
@@ -35,7 +35,7 @@ app.use('/superset-ai', routerTabChartResultAnalysis)
 app.use((error, req, res, next) => {
     console.log(error);
     const status = error.statusCode || 500;
-    const message = error.message;
+    const { message } = error;
     res.status(status).json({ message: message });
 });
 
@@ -47,3 +47,8 @@ sequelize
         app.listen(3000);
     })
     .catch(err => console.log(err));
+
+// Fungsi untuk mendapatkan path direktori proyek
+function getPath() {
+    return new URL('.', import.meta.url).pathname;
+}
