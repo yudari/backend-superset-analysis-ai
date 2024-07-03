@@ -1,38 +1,33 @@
 import _sequelize from 'sequelize';
 const { Model, Sequelize } = _sequelize;
 
-export default class tb_tab_embed extends Model {
+export default class tb_tab_dashboard_result_analysis extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
-    id_tab_dashboard: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
+    result_analysis_tab_chart: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    path_image_analysis: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    id_tb_tab_dashboard_result_analysis: {
+      type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true
-    },
-    title_tab_dashboard: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    author_tab_dashboard: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    date_tab_dashboard: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'tb_tab_embed',
+    tableName: 'tb_tab_dashboard_result_analysis',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: "pk_tb_tab_embed",
+        name: "tb_tab_dashboard_result_analysis_pkey",
         unique: true,
         fields: [
-          { name: "id_tab_dashboard" },
+          { name: "id_tb_tab_dashboard_result_analysis" },
         ]
       },
     ]

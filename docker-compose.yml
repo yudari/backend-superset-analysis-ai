@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  back-end:
+    build:
+      context: ./node
+    container_name: back-end
+    working_dir: /usr/src/app
+    networks:
+      - node-network
+    volumes:
+      - ./node:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/uploads
+    ports:
+      - "3000:3000"
+    command: npm run start
+    depends_on:
+      - db
+    environment:
+      - PG_DB=superset_31052024
+      - PG_USER=superset
+      - PG_PASSWORD=superset
+      - PG_HOST=10.0.230.64
+
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: superset
+      POSTGRES_DB: superset_31052024
+    networks:
+      - node-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    restart: always
+    tty: true
+    ports:
+      - "8000:80"
+    networks:
+      - node-network
+    depends_on:
+      - back-end
+
+networks:
+  node-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
