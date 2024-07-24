@@ -15,7 +15,7 @@ const getDashboardChartById = async (req, res, next) => {
     const month = String(today.getMonth() + 1).padStart(2, '0'); // Januari = 0
     const year = today.getFullYear();
     const formattedDate = `${day}-${month}-${year}`;
-    console.log('ini adalah nilai dari query: ', req.query);
+    console.log(req.query);
 
     try {
         const dataTabEmbed = await models.dashboard_slices.findOne({
@@ -41,7 +41,7 @@ const getDashboardChartById = async (req, res, next) => {
         if (existingEmbed) {
             await models.tb_tab_dashboard_embed.destroy({
                 where: {
-                    id_tab_dashboard_chart: dataTabEmbed.id
+                    id_tab_dashboard_chart: dataTabEmbed.id 
                 }
             });
         }

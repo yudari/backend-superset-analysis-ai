@@ -5,11 +5,9 @@ import { deleteChartResultAnalysis, insertChartResultAnalysis, upload } from '..
 
 const routerTabChartResultAnalysis = Router();
 
-routerTabChartResultAnalysis.post('/tb_tab_chart_result_analysis/', upload.single('image_analysis_chart'), insertChartResultAnalysis);
+routerTabChartResultAnalysis.post('/tb_tab_chart_result_analysis/', upload.single('path_image_analysis_chart'), insertChartResultAnalysis);
 
 routerTabChartResultAnalysis.delete('/tb_tab_chart_result_analysis/deleted/', deleteChartResultAnalysis);
-
-
 
 
 export default routerTabChartResultAnalysis;

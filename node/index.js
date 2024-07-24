@@ -8,9 +8,19 @@ import routerTbTabEmbed from './routes/tb_tab_embed.js';
 import routerTbTabDashboardEmbed from './routes/tb_tab_dashboard_embed.js';
 import routerTabChartResultAnalysis from './routes/tb_tab_chart_result_analysis.js';
 import routerTbTabDashboardResultAnalysis from './routes/tb_tab_dashboard_result_analysis.js';
+import cors from 'cors'
 
 const app = express();
 
+
+app.use(cors());
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*')
+//     res.setHeader('Access-Control-Allow-Methods', 'GET','POST','OPTIONS','PUT','PATCH')
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+//     res.setHeader('Access-Control-Allow-Credentials', true)
+//     next();
+// })
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -31,7 +41,6 @@ app.get('/', (req, res, next) => {
         if (err) {
             return res.status(500).json({ message: 'Unable to scan directory', error: err });
         }
-
         res.status(200).json({ files: files });
     });
 });

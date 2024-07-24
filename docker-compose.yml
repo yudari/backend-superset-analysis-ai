@@ -10,7 +10,6 @@ services:
       - node-network
     volumes:
       - ./node:/usr/src/app
-      - /usr/src/app/node_modules
       - /usr/src/app/uploads
     ports:
       - "3000:3000"
